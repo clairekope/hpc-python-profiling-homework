@@ -6,14 +6,18 @@ The magic commands aren't available in \scripts so we need alternative methods f
 
 ## About the Problem - 2D Poisson Equation
 
+One file is a module
+
 ## Instructions
 
-For this homework, **I strongly recommend using the OnDemand Interactive Desktop App**. The instructions for step 3 will open a new web browser window; this doesn't play well with the JupyterLab app. For VSCode users, your milleage may vary.
+For this homework, you'll need a Linux command line with your `hpc-python` environment loaded.
+**I strongly recommend using the OnDemand Interactive Desktop App**. The instructions for step 3 will open a new web browser window; this doesn't play well with the JupyterLab app. For VSCode users, your milleage may vary depending on your setup.
 
-1. Modify `poisson_demo.py` to time how long it takes to solve the Poisson equation. Make sure to avoid timing any extraneous operations.
-2. In a Jupyter Notebook we can use the `%prun` magic command, but for a script we use the `cProfile` module. Thankfully, we don't have to modify our code; we can just load the module along with whatever file we want to profile! Since `poisson_demo.py` does a bunch of extra tasks (like plot), let's profile the module `poisson_solver.py` directly using `python -m cProfile poisson_solver.py`
-3. The step above probably dumped an awful lot of inscruitable information onto your screen. Thankfully there is a visualization tool called `snakeviz` that can help us. To use `snakeviz`,
-we need to save the output of our profiling by adding the "output" option: `python -m cProfile -o poisson.prof poisson_solver.py`. Then run `snakeviz poisson.prof`. **You may want to use the OnDemand Interactive Desktop for this.**
+1. Using what we learned in class, time how long it takes to solve the Poisson equation. Edit the Python file you feel is appropriate. Make sure to avoid timing any extraneous operations. _Where should they tell me how long it took?_
+2. In a Jupyter Notebook we can use the `%prun` magic command, but for a script we use the `cProfile` module. Thankfully, we don't have to modify our code; we can just load the module along with whatever file we want to profile! This looks like `python -m cProfile <filename>`. Use `cProfile` to profile the Python file you feel is appropriate.
+3. The step above should have dumped an awful lot of inscruitable information onto your screen. Thankfully there is a visualization tool called `snakeviz` that can help us. To use `snakeviz`,
+we need to save the output of our profiling by adding the "output" option and specifying a filename: `python -m cProfile -o poisson.prof <filename>`. Then run `snakeviz poisson.prof`. **I suggest using the OnDemand Interactive Desktop for this.**
+4. The `snakeviz` interface is quite nice because it let's you see which functions call other functions. This let's you filter extraneous information. If your results don't make sense, try profiling the other file. _Which function (that isn't from an external library like NumPy) should we target for optimization? Which statistics tell us so?_
 4. _Have students instrument line profiler following [these](https://kernprof.readthedocs.io/en/latest/) docs_
 
 
