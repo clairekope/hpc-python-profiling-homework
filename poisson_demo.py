@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from poisson_solver import solve_poisson_problem
 
 # Define the size of the grid
-nx, ny = 101, 101
+nx, ny = 51, 51
 
 # Solve the Poisson equation on this grid
 u, x, y, residual = solve_poisson_problem(nx, ny, source_value=1.0)
