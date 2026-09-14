@@ -56,8 +56,38 @@ def assemble_poisson_system(nx: int, ny: int, source_value: float) -> tuple[np.n
 
 
 def solve_dense_system(A: np.ndarray, b: np.ndarray) -> np.ndarray:
-    """Solve the dense linear system directly."""
-    return np.linalg.solve(A, b)
+    """Solve the dense linear system by manual Gaussian elimination."""
+    n = len(b)
+    M = A.copy()
+    x = b.copy()
+
+    for k in range(n):
+        pivot_row = max(range(k, n), key=lambda r: abs(M[r, k]))
+        if abs(M[pivot_row, k]) < 1e-14:
+            raise ValueError("Matrix is singular or ill-conditioned.")
+
+        if pivot_row != k:
+            M[[k, pivot_row], :] = M[[pivot_row, k], :]
+            x[[k, pivot_row]] = x[[pivot_row, k]]
+
+        pivot = M[k, k]
+        for j in range(k, n):
+            M[k, j] /= pivot
+        x[k] /= pivot
+
+        for i in range(k + 1, n):
+            factor = M[i, k]
+            if factor == 0.0:
+                continue
+            for j in range(k, n):
+                M[i, j] -= factor * M[k, j]
+            x[i] -= factor * x[k]
+
+    for i in range(n - 1, -1, -1):
+        for j in range(i + 1, n):
+            x[i] -= M[i, j] * x[j]
+
+    return x
 
 
 def expand_solution(u_interior: np.ndarray, nx: int, ny: int) -> np.ndarray:
