@@ -2,4 +2,6 @@
 2. _Nothing to answer_
 3. _Nothing to answer_
 4. Function & justification:
-5. 
+5. Line & explanation:
+6. Line & explanation:
+7. Guess:

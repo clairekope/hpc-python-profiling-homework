@@ -56,13 +56,13 @@ def assemble_poisson_system(nx: int, ny: int, source_value: float) -> tuple[np.n
 
 
 def solve_dense_system(A: np.ndarray, b: np.ndarray) -> np.ndarray:
-    """Solve the dense linear system by manual Gaussian elimination."""
+    """Solve the dense linear system by Gaussian elimination."""
     n = len(b)
     M = A.copy()
     x = b.copy()
 
     for k in range(n):
-        pivot_row = max(range(k, n), key=lambda r: abs(M[r, k]))
+        pivot_row = k + np.argmax(np.abs(M[k:, k]))
         if abs(M[pivot_row, k]) < 1e-14:
             raise ValueError("Matrix is singular or ill-conditioned.")
 
