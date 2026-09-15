@@ -1,7 +1,8 @@
-1. Timing measurement:
+1.
 2. _Nothing to answer_
 3. _Nothing to answer_
-4. Function & justification:
-5. Line & explanation:
-6. Line & explanation:
-7. Guess:
+4.
+5.
+6.
+7.
+8.
